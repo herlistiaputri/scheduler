@@ -5,7 +5,6 @@ import com.learning.schedulerapp.module.tableB.TableBService;
 import com.learning.schedulerapp.module.tableC.TableCService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -34,29 +33,29 @@ public class Scheduler {
         /* Change or add this CompletableFuture<Void> for the reference manager type you've added */
         CompletableFuture<Void> tableA = CompletableFuture.runAsync(() -> {
             try {
-                log.info("Method fmc reference manager called  by Thread : " + Thread.currentThread().getName() + "  at " + LocalDateTime.now());
+                log.info("Method table a called  by Thread : " + Thread.currentThread().getName() + " at " + LocalDateTime.now());
                 tableAService.readReference();
             } catch (IOException e) {
-                log.error("Error read fmc reference caused by " + e.getMessage());
+                log.error("Error read table a caused by " + e.getMessage());
             }
         }, customThreadPool);
 
         CompletableFuture<Void> tableB = CompletableFuture.runAsync(() -> {
             try {
-                log.info("Method fmc reference manager called  by Thread : " + Thread.currentThread().getName() + "  at " + LocalDateTime.now());
+                log.info("Method table b manager called  by Thread : " + Thread.currentThread().getName() + "  at " + LocalDateTime.now());
                 tableBService.readReference();
             } catch (IOException e) {
-                log.error("Error read fmc reference caused by " + e.getMessage());
+                log.error("Error read table b caused by " + e.getMessage());
             }
         }, customThreadPool);
 
 
         CompletableFuture<Void> tableC = CompletableFuture.runAsync(() -> {
             try {
-                log.info("Method fmc reference manager called  by Thread : " + Thread.currentThread().getName() + "  at " + LocalDateTime.now());
+                log.info("Method table c manager called  by Thread : " + Thread.currentThread().getName() + "  at " + LocalDateTime.now());
                 tableCService.readReference();
             } catch (IOException e) {
-                log.error("Error read fmc reference caused by " + e.getMessage());
+                log.error("Error read table c caused by " + e.getMessage());
             }
         }, customThreadPool);
         CompletableFuture.allOf(
